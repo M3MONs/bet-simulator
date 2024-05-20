@@ -9,8 +9,8 @@ const Main = styled.main`
     margin: 0 auto;
     padding: 70px 0;
     display: grid;
-    gap: 2.5rem;
-    grid-template-columns: 1fr 2.75fr 1fr;
+    gap: 1rem;
+    grid-template-columns: 1fr 3fr 1fr;
 `;
 
 const HomePage = () => {
