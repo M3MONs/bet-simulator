@@ -1,6 +1,7 @@
 import Navbar from "src/components/organisms/Navbar/Navbar";
 import SportsLeftMenu from "../organisms/SportsLeftMenu/SportsLeftMenu";
 import styled from "styled-components";
+import SportsCompetitions from "../organisms/SportsCompetitions/SportsCompetitions";
 
 const Main = styled.main`
     max-width: 1440px;
@@ -8,7 +9,8 @@ const Main = styled.main`
     margin: 0 auto;
     padding: 70px 0;
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
+    gap: 2.5rem;
+    grid-template-columns: 1fr 2.75fr 1fr;
 `;
 
 const HomePage = () => {
@@ -17,6 +19,7 @@ const HomePage = () => {
             <Navbar />
             <Main>
                 <SportsLeftMenu />
+                <SportsCompetitions />
             </Main>
         </>
     );
