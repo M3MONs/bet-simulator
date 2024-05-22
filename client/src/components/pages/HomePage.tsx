@@ -2,9 +2,10 @@ import Navbar from "src/components/organisms/Navbar/Navbar";
 import SportsLeftMenu from "../organisms/SportsLeftMenu/SportsLeftMenu";
 import styled from "styled-components";
 import SportsCompetitions from "../organisms/SportsCompetitions/SportsCompetitions";
+import BettingSlip from "../organisms/BettingSlip/BettingSlip";
 
 const Main = styled.main`
-    max-width: 1440px;
+    max-width: 1500px;
     min-height: 100vh;
     margin: 0 auto;
     padding: 70px 0;
@@ -20,6 +21,7 @@ const HomePage = () => {
             <Main>
                 <SportsLeftMenu />
                 <SportsCompetitions />
+                <BettingSlip />
             </Main>
         </>
     );
