@@ -1,8 +1,10 @@
 import styled from "styled-components";
 
 type BetButtonProps = {
-    result?: string;
-    odd?: number;
+    result: string;
+    odd: number;
+    keyProp: number;
+    handleClick: (keyProp: number) => void;
 };
 
 const BetButtonWrapper = styled.button`
@@ -24,9 +26,9 @@ const BetButtonWrapper = styled.button`
     }
 `;
 
-const BetButton = ({ result, odd }: BetButtonProps) => {
+const BetButton = ({ result, odd, keyProp, handleClick }: BetButtonProps) => {
     return (
-        <BetButtonWrapper>
+        <BetButtonWrapper onClick={() => handleClick(keyProp)}>
             <text>{result}</text>
             <h3>{odd}</h3>
         </BetButtonWrapper>
