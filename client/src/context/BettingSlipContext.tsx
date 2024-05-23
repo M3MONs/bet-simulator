@@ -11,11 +11,13 @@ type BetProps = {
 interface BettingSlipContextProps {
     selectedBets: BetProps[];
     addBet: (bet: BetProps) => void;
+    removeBet: (event: number) => void;
 }
 
 const BettingSlipContext = createContext<BettingSlipContextProps>({
     selectedBets: [],
     addBet: () => {},
+    removeBet: () => {},
 });
 
 const BettingSlipContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -29,8 +31,12 @@ const BettingSlipContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
         });
     };
 
+    const removeBet = (event: number) => {
+        setSelectedBets((prevBets) => prevBets.filter((bet) => bet.event !== event));
+    };
+
     return (
-        <BettingSlipContext.Provider value={{ addBet, selectedBets }}>
+        <BettingSlipContext.Provider value={{ selectedBets, addBet, removeBet }}>
             {children}
         </BettingSlipContext.Provider>
     );
