@@ -7,17 +7,27 @@ import {
 } from "./BettingSlip.style";
 import EmptyBettingSlip from "src/components/molecules/EmptyBettingSlip/EmptyBettingSlip";
 import BettingSlipCalculator from "src/components/molecules/BettingSlipCalculator/BettingSlipCalculator";
+import { useBettingContext } from "src/context/BettingSlipContext";
+import BettingSlipPick from "src/components/molecules/BettingSlipPick/BettingSlipPick";
 
 const BettingSlip = () => {
+    const { selectedBets } = useBettingContext();
+
     return (
         <BettingSlipWrapper>
             <BettingSlipHeader>No bets selected</BettingSlipHeader>
             <BettingSlipContent>
-                <EmptyBettingSlip />
+                {selectedBets.length > 0 ? (
+                    selectedBets.map((bet, index) => <BettingSlipPick bet={bet} key={index} />)
+                ) : (
+                    <EmptyBettingSlip />
+                )}
             </BettingSlipContent>
             <BettingSlipFooter>
                 <BettingSlipCalculator />
-                <BettingSlipBetBtn disabled>Bet</BettingSlipBetBtn>
+                <BettingSlipBetBtn disabled={selectedBets.length > 0 ? false : true}>
+                    Bet
+                </BettingSlipBetBtn>
             </BettingSlipFooter>
         </BettingSlipWrapper>
     );

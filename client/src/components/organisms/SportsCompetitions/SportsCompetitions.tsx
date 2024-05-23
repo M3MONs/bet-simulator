@@ -8,13 +8,7 @@ const SportsCompetitions = () => {
         <SportsCompetitionsWrapper>
             <SportCompetitionsList date='Today'>
                 {matches.map((match, index) => (
-                    <SportCompetitionsListItem
-                        head={match.head}
-                        match={match.match}
-                        odds={match.odds}
-                        flag={match.flag}
-                        key={index}
-                    />
+                    <SportCompetitionsListItem match={match} key={index} />
                 ))}
             </SportCompetitionsList>
         </SportsCompetitionsWrapper>
