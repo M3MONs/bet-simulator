@@ -16,6 +16,7 @@ export const BettingSlipHeader = styled.header`
 `;
 
 export const BettingSlipContent = styled.div`
+    height: 100%;
     padding: 1rem;
     text-align: center;
 `;
