@@ -3,6 +3,7 @@ import SportsLeftMenu from "../organisms/SportsLeftMenu/SportsLeftMenu";
 import styled from "styled-components";
 import SportsCompetitions from "../organisms/SportsCompetitions/SportsCompetitions";
 import BettingSlip from "../organisms/BettingSlip/BettingSlip";
+import BettingSlipContextProvider from "src/context/BettingSlipContext";
 
 const Main = styled.main`
     max-width: 1500px;
@@ -20,8 +21,10 @@ const HomePage = () => {
             <Navbar />
             <Main>
                 <SportsLeftMenu />
-                <SportsCompetitions />
-                <BettingSlip />
+                <BettingSlipContextProvider>
+                    <SportsCompetitions />
+                    <BettingSlip />
+                </BettingSlipContextProvider>
             </Main>
         </>
     );
