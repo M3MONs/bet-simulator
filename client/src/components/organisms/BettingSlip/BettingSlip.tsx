@@ -12,7 +12,7 @@ import BettingSlipPick from "src/components/molecules/BettingSlipPick/BettingSli
 
 const BettingSlip = () => {
     const { selectedBets } = useBettingContext();
-    console.log(selectedBets);
+
     return (
         <BettingSlipWrapper>
             <BettingSlipHeader>No bets selected</BettingSlipHeader>
@@ -25,7 +25,9 @@ const BettingSlip = () => {
             </BettingSlipContent>
             <BettingSlipFooter>
                 <BettingSlipCalculator />
-                <BettingSlipBetBtn disabled>Bet</BettingSlipBetBtn>
+                <BettingSlipBetBtn disabled={selectedBets.length > 0 ? false : true}>
+                    Bet
+                </BettingSlipBetBtn>
             </BettingSlipFooter>
         </BettingSlipWrapper>
     );
