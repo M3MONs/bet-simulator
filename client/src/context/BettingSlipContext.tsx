@@ -10,18 +10,29 @@ type BetProps = {
 
 interface BettingSlipContextProps {
     selectedBets: BetProps[];
+    canBet: boolean;
     addBet: (bet: BetProps) => void;
     removeBet: (event: number) => void;
+    getTotalOdds: () => number;
+    getPotentialWin: () => string;
+    handleSetStake: (value: number) => void;
 }
 
 const BettingSlipContext = createContext<BettingSlipContextProps>({
     selectedBets: [],
+    canBet: false,
     addBet: () => {},
     removeBet: () => {},
+    getTotalOdds: () => 0,
+    getPotentialWin: () => "",
+    handleSetStake: () => {},
 });
 
 const BettingSlipContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [selectedBets, setSelectedBets] = useState<BetProps[]>([]);
+    const [stake, setStake] = useState<number>(0);
+
+    const canBet = selectedBets.length > 0 && stake > 0;
 
     const addBet = (bet: BetProps) => {
         setSelectedBets((prevBets) => {
@@ -35,11 +46,30 @@ const BettingSlipContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
         setSelectedBets((prevBets) => prevBets.filter((bet) => bet.event !== event));
     };
 
-    return (
-        <BettingSlipContext.Provider value={{ selectedBets, addBet, removeBet }}>
-            {children}
-        </BettingSlipContext.Provider>
-    );
+    const handleSetStake = (value: number) => {
+        setStake(value);
+    };
+
+    const getTotalOdds = () => {
+        const totalOdds = selectedBets.reduce((total, bet) => total * bet.odd, 1);
+        return parseFloat(totalOdds.toFixed(2));
+    };
+
+    const getPotentialWin = () => {
+        return (getTotalOdds() * stake).toFixed(2);
+    };
+
+    const values = {
+        selectedBets,
+        canBet,
+        addBet,
+        removeBet,
+        getTotalOdds,
+        getPotentialWin,
+        handleSetStake,
+    };
+
+    return <BettingSlipContext.Provider value={values}>{children}</BettingSlipContext.Provider>;
 };
 
 export default BettingSlipContextProvider;
