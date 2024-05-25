@@ -11,12 +11,24 @@ import { useBettingContext } from "src/context/BettingSlipContext";
 import BettingSlipPick from "src/components/molecules/BettingSlipPick/BettingSlipPick";
 import BettingSlipStake from "src/components/molecules/BettingSlipStake/BettingSlipStake";
 
+const getHeader = (selectedBets: number) => {
+    if (selectedBets === 0) {
+        return "No event selected";
+    }
+
+    if (selectedBets === 1) {
+        return "1 event selected";
+    }
+
+    return `${selectedBets} events selected`;
+};
+
 const BettingSlip = () => {
     const { selectedBets, canBet } = useBettingContext();
 
     return (
         <BettingSlipWrapper>
-            <BettingSlipHeader>No bets selected</BettingSlipHeader>
+            <BettingSlipHeader>{getHeader(selectedBets.length)}</BettingSlipHeader>
             <BettingSlipContent>
                 {selectedBets.length > 0 ? (
                     selectedBets.map((bet, index) => <BettingSlipPick bet={bet} key={index} />)
