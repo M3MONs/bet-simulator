@@ -56,6 +56,10 @@ const BettingSlipContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
     };
 
     const getPotentialWin = () => {
+        if (selectedBets.length === 0) {
+            setStake(0);
+            return "0.00";
+        }
         return (getTotalOdds() * stake).toFixed(2);
     };
 
