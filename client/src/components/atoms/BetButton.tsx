@@ -1,35 +1,51 @@
 import styled from "styled-components";
 
 type BetButtonProps = {
-    result: string;
+    result?: string;
     odd: number;
-    keyProp: number;
-    handleClick: (keyProp: number) => void;
+    keyProp?: number;
+    handleClick?: (keyProp: number) => void;
+    isClickable?: boolean;
 };
 
-const BetButtonWrapper = styled.button`
-    padding: 0.2rem 0.8rem;
+const BetButtonWrapper = styled.button<{ isClickable: boolean }>`
     background: #ffcc00;
     border: none;
     border-radius: 0.5rem;
     min-width: 5.2rem;
     width: 150px;
-    cursor: pointer;
 
-    text {
-        font-size: 0.7rem;
-        color: #25282f;
-    }
+    padding: ${(props) => (props.isClickable ? "0.2rem 0.8rem" : "0.5rem 0.8rem")};
+    cursor: ${(props) => (props.isClickable ? "pointer" : "default")};
 
-    &:hover {
-        background: #ffdd54;
-    }
+    ${(props) =>
+        props.isClickable &&
+        `
+            &:hover {
+                background: #ffdd54;
+            }
+        `}
 `;
 
-const BetButton = ({ result, odd, keyProp, handleClick }: BetButtonProps) => {
+const ResultText = styled.span`
+    font-size: 0.7rem;
+    color: #25282f;
+`;
+
+const BetButton = ({
+    result,
+    odd,
+    keyProp = 0,
+    handleClick = () => {},
+    isClickable = true,
+}: BetButtonProps) => {
+    const handleButtonClick = () => {
+        handleClick(keyProp);
+    };
+
     return (
-        <BetButtonWrapper onClick={() => handleClick(keyProp)}>
-            <text>{result}</text>
+        <BetButtonWrapper onClick={handleButtonClick} isClickable={isClickable}>
+            {result && <ResultText>{result}</ResultText>}
             <h3>{odd}</h3>
         </BetButtonWrapper>
     );
