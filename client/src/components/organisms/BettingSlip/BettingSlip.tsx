@@ -9,9 +9,10 @@ import EmptyBettingSlip from "src/components/molecules/EmptyBettingSlip/EmptyBet
 import BettingSlipCalculator from "src/components/molecules/BettingSlipCalculator/BettingSlipCalculator";
 import { useBettingContext } from "src/context/BettingSlipContext";
 import BettingSlipPick from "src/components/molecules/BettingSlipPick/BettingSlipPick";
+import BettingSlipStake from "src/components/molecules/BettingSlipStake/BettingSlipStake";
 
 const BettingSlip = () => {
-    const { selectedBets } = useBettingContext();
+    const { selectedBets, canBet } = useBettingContext();
 
     return (
         <BettingSlipWrapper>
@@ -24,10 +25,9 @@ const BettingSlip = () => {
                 )}
             </BettingSlipContent>
             <BettingSlipFooter>
+                {selectedBets.length > 0 && <BettingSlipStake />}
                 <BettingSlipCalculator />
-                <BettingSlipBetBtn disabled={selectedBets.length > 0 ? false : true}>
-                    Bet
-                </BettingSlipBetBtn>
+                <BettingSlipBetBtn disabled={canBet ? false : true}>Bet</BettingSlipBetBtn>
             </BettingSlipFooter>
         </BettingSlipWrapper>
     );
