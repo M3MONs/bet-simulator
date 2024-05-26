@@ -18,10 +18,18 @@ type AuthInputProps = {
     handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     placeholder: string;
     type: string;
+    name?: string;
 };
 
-const AuthInput = ({ placeholder, type, handleChange }: AuthInputProps) => {
-    return <Input placeholder={placeholder} type={type} onChange={(e) => handleChange(e)} />;
+const AuthInput = ({ handleChange, placeholder, type, name }: AuthInputProps) => {
+    return (
+        <Input
+            placeholder={placeholder}
+            type={type}
+            onChange={(e) => handleChange(e)}
+            name={name}
+        />
+    );
 };
 
 export default AuthInput;
