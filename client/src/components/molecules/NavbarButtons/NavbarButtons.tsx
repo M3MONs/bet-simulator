@@ -5,7 +5,7 @@ const NavbarButtons = () => {
     return (
         <NavbarButtonsContainer>
             <NavbarButton name='Login' to='/login' />
-            <NavbarButton name='Sign up' to='#' />
+            <NavbarButton name='Sign up' to='/register' />
         </NavbarButtonsContainer>
     );
 };
