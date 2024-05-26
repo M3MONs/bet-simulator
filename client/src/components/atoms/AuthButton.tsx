@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const AuthButtonContainer = styled.button<{ color: string; background: string }>`
+const Button = styled.button<{ color: string; background: string }>`
     cursor: pointer;
     width: 300px;
     padding: 0.75rem 1rem;
@@ -30,9 +30,9 @@ const AuthButton = ({
     background = "#d2161e",
 }: AuthButtonProps) => {
     return (
-        <AuthButtonContainer color={color} background={background} onClick={handleClick}>
+        <Button color={color} background={background} onClick={handleClick}>
             {name}
-        </AuthButtonContainer>
+        </Button>
     );
 };
 
