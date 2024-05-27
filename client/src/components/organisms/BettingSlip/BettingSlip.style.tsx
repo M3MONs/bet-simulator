@@ -28,18 +28,3 @@ export const BettingSlipFooter = styled.footer`
     gap: 1rem;
     border-top: 1px solid #e5e5e5;
 `;
-
-export const BettingSlipBetBtn = styled.button`
-    background: #d2161e;
-    color: white;
-    padding: 0.75rem;
-    border-radius: 5px;
-    font-weight: 700;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    &:disabled {
-        opacity: 0.4;
-        cursor: default;
-    }
-`;

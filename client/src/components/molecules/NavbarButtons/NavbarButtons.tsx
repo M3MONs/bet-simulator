@@ -1,11 +1,15 @@
+import LinkButton from "src/components/atoms/LinkButton";
 import { NavbarButtonsContainer } from "./NavbarButtons.style";
-import NavbarButton from "src/components/atoms/NavbarButton";
 
 const NavbarButtons = () => {
     return (
         <NavbarButtonsContainer>
-            <NavbarButton name='Login' to='/login' />
-            <NavbarButton name='Sign up' to='/register' />
+            <LinkButton to='/login' sx={{ background: "white" }}>
+                Login
+            </LinkButton>
+            <LinkButton to='/register' sx={{ background: "white" }}>
+                Register
+            </LinkButton>
         </NavbarButtonsContainer>
     );
 };

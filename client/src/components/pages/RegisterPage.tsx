@@ -1,9 +1,9 @@
 import { useCallback, useState } from "react";
-import AuthButton from "../atoms/AuthButton";
 import AuthInput from "../atoms/AuthInput";
 import AuthForm from "../molecules/AuthForm/AuthForm";
 import AuthContent from "../organisms/AuthContent/AuthContent";
 import AuthPage from "../templates/AuthPage";
+import NormalButton from "../atoms/NormalButton";
 
 const RegisterPage = () => {
     const [formData, setFormData] = useState({
@@ -54,7 +54,7 @@ const RegisterPage = () => {
                         handleChange={handleChange}
                         name='repeatPassword'
                     />
-                    <AuthButton name='Sign Up' handleClick={handleSignUp} />
+                    <NormalButton handleClick={handleSignUp}>Sign Up</NormalButton>
                 </AuthForm>
             </AuthContent>
         </AuthPage>

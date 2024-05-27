@@ -1,5 +1,4 @@
 import {
-    BettingSlipBetBtn,
     BettingSlipContent,
     BettingSlipFooter,
     BettingSlipHeader,
@@ -10,6 +9,7 @@ import BettingSlipCalculator from "src/components/molecules/BettingSlipCalculato
 import { useBettingContext } from "src/context/BettingSlipContext";
 import BettingSlipPick from "src/components/molecules/BettingSlipPick/BettingSlipPick";
 import BettingSlipStake from "src/components/molecules/BettingSlipStake/BettingSlipStake";
+import NormalButton from "src/components/atoms/NormalButton";
 
 const getHeader = (selectedBets: number) => {
     if (selectedBets === 0) {
@@ -39,7 +39,7 @@ const BettingSlip = () => {
             <BettingSlipFooter>
                 {selectedBets.length > 0 && <BettingSlipStake />}
                 <BettingSlipCalculator />
-                <BettingSlipBetBtn disabled={canBet ? false : true}>Bet</BettingSlipBetBtn>
+                <NormalButton disabled={!canBet}>Bet</NormalButton>
             </BettingSlipFooter>
         </BettingSlipWrapper>
     );

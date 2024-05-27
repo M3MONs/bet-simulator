@@ -1,11 +1,15 @@
-import NavbarLink from "src/components/atoms/NavbarLink";
 import { NavbarListContainer } from "./NavbarList.style";
+import LinkButton from "src/components/atoms/LinkButton";
 
 const NavbarList = () => {
     return (
         <NavbarListContainer>
-            <NavbarLink to='#' name='Bets' />
-            <NavbarLink to='#' name='Coupons' />
+            <LinkButton to='/' sx={{ fontSize: "1rem" }}>
+                Bets
+            </LinkButton>
+            <LinkButton to='/' sx={{ fontSize: "1rem" }}>
+                Coupons
+            </LinkButton>
         </NavbarListContainer>
     );
 };

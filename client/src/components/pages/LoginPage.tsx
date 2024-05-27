@@ -1,9 +1,10 @@
 import AuthForm from "../molecules/AuthForm/AuthForm";
 import AuthInput from "../atoms/AuthInput";
-import AuthButton from "../atoms/AuthButton";
 import AuthContent from "../organisms/AuthContent/AuthContent";
 import AuthPage from "../templates/AuthPage";
 import { useCallback, useState } from "react";
+import LinkButton from "../atoms/LinkButton";
+import NormalButton from "../atoms/NormalButton";
 
 const LoginPage = () => {
     const [login, setLogin] = useState("");
@@ -31,8 +32,10 @@ const LoginPage = () => {
                         type='password'
                         handleChange={handlePasswordChange}
                     />
-                    <AuthButton name='Login' handleClick={handleLogin} />
-                    <AuthButton name='Forgot password?' background='white' color='#d2161e' />
+                    <NormalButton handleClick={handleLogin}>Login</NormalButton>
+                    <LinkButton to='#' sx={{ color: "red", fontWeight: "bold", fontSize: "1rem" }}>
+                        Forgot password?
+                    </LinkButton>
                 </AuthForm>
             </AuthContent>
         </AuthPage>
