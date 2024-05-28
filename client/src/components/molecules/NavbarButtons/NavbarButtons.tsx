@@ -7,6 +7,7 @@ const NavbarButtons = () => {
     const { accessToken, logout } = useAuth();
     return (
         <NavbarButtonsContainer>
+            // TODO: User profile button
             {accessToken ? (
                 <NormalButton sx={{ background: "white" }} handleClick={logout}>
                     Logout

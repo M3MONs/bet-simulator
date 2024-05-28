@@ -53,6 +53,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setRefreshToken(null);
     };
 
+    // TODO: Implement refresh token logic
+
     const value = useMemo(
         () => ({ accessToken, refreshToken, login, logout }),
         [accessToken, refreshToken]

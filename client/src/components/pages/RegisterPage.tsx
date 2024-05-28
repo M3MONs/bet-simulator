@@ -22,6 +22,7 @@ const RegisterPage = () => {
     }, []);
 
     const handleSignUp = () => {
+        // TODO: data validation
         // TODO: Implement sign up logic
         console.log(formData);
     };

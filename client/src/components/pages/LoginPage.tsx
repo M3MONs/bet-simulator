@@ -23,6 +23,7 @@ const LoginPage = () => {
     }, []);
 
     const handleLogin = useCallback(async () => {
+        // TODO: Add toast notification
         try {
             await login(username, password);
             navigate("/");

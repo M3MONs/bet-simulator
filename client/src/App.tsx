@@ -9,6 +9,7 @@ const App = () => {
         <Router>
             <AuthProvider>
                 <Routes>
+                    {/* TODO: Add protected routes; Add profile page; Add 404 page; Add coupons page */}
                     <Route path='/' element={<HomePage />} />
                     <Route path='/login' element={<LoginPage />} />
                     <Route path='/register' element={<RegisterPage />} />
