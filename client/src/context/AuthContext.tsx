@@ -53,7 +53,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setRefreshToken(null);
     };
 
-    // TODO: Implement refresh token logic
+    const handleRefreshToken = async () => {
+        try {
+            const res = await api.post("auth/token/refresh/", { refresh: refreshToken });
+            const { access } = res.data;
+            setAccessToken(access);
+        } catch (error) {
+            console.error("Refresh token error:", error);
+            logout();
+        }
+    };
 
     const value = useMemo(
         () => ({ accessToken, refreshToken, login, logout }),
