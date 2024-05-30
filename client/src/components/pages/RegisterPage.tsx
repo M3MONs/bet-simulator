@@ -30,7 +30,7 @@ const RegisterPage = () => {
     return (
         <AuthPage>
             <AuthContent type='Sign Up'>
-                <AuthForm title='Sign Up'>
+                <AuthForm title='Sign Up' submitFunction={handleSignUp}>
                     <AuthInput
                         placeholder='Login'
                         type='text'
@@ -55,7 +55,7 @@ const RegisterPage = () => {
                         handleChange={handleChange}
                         name='repeatPassword'
                     />
-                    <NormalButton handleClick={handleSignUp}>Sign Up</NormalButton>
+                    <NormalButton type='submit'>Sign Up</NormalButton>
                 </AuthForm>
             </AuthContent>
         </AuthPage>

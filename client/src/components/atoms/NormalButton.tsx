@@ -30,11 +30,12 @@ type NormalButtonProps = {
     sx?: { [key: string]: string };
     handleClick?: () => void;
     disabled?: boolean;
+    type?: "button" | "submit" | "reset";
 };
 
-const NormalButton = ({ children, handleClick, disabled }: NormalButtonProps) => {
+const NormalButton = ({ children, handleClick, disabled, type = "button" }: NormalButtonProps) => {
     return (
-        <Button onClick={handleClick} disabled={disabled}>
+        <Button onClick={handleClick} disabled={disabled} type={type}>
             {children}
         </Button>
     );

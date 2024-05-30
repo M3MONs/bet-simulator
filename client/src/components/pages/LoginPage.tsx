@@ -35,7 +35,7 @@ const LoginPage = () => {
     return (
         <AuthPage>
             <AuthContent type='Login'>
-                <AuthForm title='Login'>
+                <AuthForm title='Login' submitFunction={handleLogin}>
                     <AuthInput
                         placeholder='Login'
                         type='text'
@@ -46,7 +46,7 @@ const LoginPage = () => {
                         type='password'
                         handleChange={handlePasswordChange}
                     />
-                    <NormalButton handleClick={handleLogin}>Login</NormalButton>
+                    <NormalButton type='submit'>Login</NormalButton>
                     <LinkButton to='#' sx={{ color: "red", fontWeight: "bold", fontSize: "1rem" }}>
                         Forgot password?
                     </LinkButton>
