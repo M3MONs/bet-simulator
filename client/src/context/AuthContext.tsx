@@ -55,6 +55,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
 
     const handleRefreshToken = useCallback(async () => {
+        if (!refreshToken) {
+            logout();
+            return;
+        }
+
         try {
             const res = await api.post("auth/token/refresh/", { refresh: refreshToken });
             const { access } = res.data;
