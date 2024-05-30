@@ -6,6 +6,7 @@ interface AuthContextProps {
     refreshToken: string | null;
     login: (username: string, password: string) => Promise<void>;
     logout: () => void;
+    handleRefreshToken: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
@@ -65,7 +66,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
 
     const value = useMemo(
-        () => ({ accessToken, refreshToken, login, logout }),
+        () => ({ accessToken, refreshToken, login, logout, handleRefreshToken }),
         [accessToken, refreshToken]
     );
 
