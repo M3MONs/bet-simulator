@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import api from "src/api/api";
 
 interface AuthContextProps {
@@ -54,7 +54,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setRefreshToken(null);
     };
 
-    const handleRefreshToken = async () => {
+    const handleRefreshToken = useCallback(async () => {
         try {
             const res = await api.post("auth/token/refresh/", { refresh: refreshToken });
             const { access } = res.data;
@@ -62,12 +62,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         } catch (error) {
             console.error("Refresh token error:", error);
             logout();
+            throw new Error("Refresh token error");
         }
-    };
+    }, [refreshToken]);
 
     const value = useMemo(
         () => ({ accessToken, refreshToken, login, logout, handleRefreshToken }),
-        [accessToken, refreshToken]
+        [accessToken, refreshToken, handleRefreshToken]
     );
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
