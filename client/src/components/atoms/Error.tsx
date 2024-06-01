@@ -8,8 +8,8 @@ const ErrorWrapper = styled.p`
     margin: 0 10px;
 `;
 
-const Error = ({ children }: { children: string }) => {
+const ErrorText = ({ children }: { children: string }) => {
     return <ErrorWrapper>{children}</ErrorWrapper>;
 };
 
-export default Error;
+export default ErrorText;
