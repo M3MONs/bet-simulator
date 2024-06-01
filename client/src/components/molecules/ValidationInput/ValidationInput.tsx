@@ -1,6 +1,6 @@
 import React from "react";
 import { ValidationInputWrapper } from "./ValidationInput.style";
-import Error from "src/components/atoms/Error";
+import ErrorText from "src/components/atoms/Error";
 
 type AuthInputProps = {
     children: React.ReactNode;
@@ -11,7 +11,7 @@ const ValidationInput = ({ children, error }: AuthInputProps) => {
     return (
         <ValidationInputWrapper>
             {children}
-            {error && <Error>{error}</Error>}
+            {error && <ErrorText>{error}</ErrorText>}
         </ValidationInputWrapper>
     );
 };
