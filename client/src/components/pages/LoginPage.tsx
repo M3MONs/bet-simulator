@@ -7,11 +7,13 @@ import NormalButton from "../atoms/NormalButton";
 import AuthContent from "../organisms/AuthContent/AuthContent";
 import { useNavigate } from "react-router-dom";
 import Input from "../atoms/Input";
+import ErrorText from "../atoms/Error";
 
 const LoginPage = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState<string | null>(null);
     const { login } = useAuth();
 
     const handleUsernameChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,8 +29,9 @@ const LoginPage = () => {
         try {
             await login(username, password);
             navigate("/");
-        } catch (error) {
+        } catch (error: any) {
             console.log(error);
+            setError(error.toString());
         }
     }, [username, password, login, navigate]);
 
@@ -42,6 +45,7 @@ const LoginPage = () => {
                         type='password'
                         handleChange={handlePasswordChange}
                     />
+                    {error && <ErrorText>{error}</ErrorText>}
                     <NormalButton type='submit'>Login</NormalButton>
                     <LinkButton to='#' sx={{ color: "red", fontWeight: "bold", fontSize: "1rem" }}>
                         Forgot password?
