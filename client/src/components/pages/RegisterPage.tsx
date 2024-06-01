@@ -5,7 +5,7 @@ import AuthPage from "../templates/AuthPage";
 import NormalButton from "../atoms/NormalButton";
 import { ErrorsProps, validateRegisterForm } from "../utils/validators";
 import Input from "../atoms/Input";
-import AuthInput from "../molecules/ValidationInput/ValidationInput";
+import ValidationInput from "../molecules/ValidationInput/ValidationInput";
 
 const RegisterPage = () => {
     const [formData, setFormData] = useState({
@@ -37,7 +37,7 @@ const RegisterPage = () => {
         <AuthPage>
             <AuthContent type='Sign Up'>
                 <AuthForm title='Sign Up' submitFunction={handleSignUp}>
-                    <AuthInput
+                    <ValidationInput
                         children={
                             <Input
                                 handleChange={handleChange}
@@ -48,7 +48,7 @@ const RegisterPage = () => {
                         }
                         error={errors.username}
                     />
-                    <AuthInput
+                    <ValidationInput
                         children={
                             <Input
                                 placeholder='Email'
@@ -59,7 +59,7 @@ const RegisterPage = () => {
                         }
                         error={errors.email}
                     />
-                    <AuthInput
+                    <ValidationInput
                         children={
                             <Input
                                 placeholder='Password'
@@ -69,7 +69,7 @@ const RegisterPage = () => {
                             />
                         }
                     />
-                    <AuthInput
+                    <ValidationInput
                         children={
                             <Input
                                 placeholder='Repeat password'
