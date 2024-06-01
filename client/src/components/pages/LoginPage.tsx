@@ -1,12 +1,12 @@
 import { useCallback, useState } from "react";
 import { useAuth } from "src/context/AuthContext";
 import AuthForm from "../molecules/AuthForm/AuthForm";
-import AuthInput from "../atoms/AuthInput";
 import AuthPage from "../templates/AuthPage";
 import LinkButton from "../atoms/LinkButton";
 import NormalButton from "../atoms/NormalButton";
 import AuthContent from "../organisms/AuthContent/AuthContent";
 import { useNavigate } from "react-router-dom";
+import Input from "../atoms/Input";
 
 const LoginPage = () => {
     const navigate = useNavigate();
@@ -30,18 +30,14 @@ const LoginPage = () => {
         } catch (error) {
             console.log(error);
         }
-    }, [username, password]);
+    }, [username, password, login, navigate]);
 
     return (
         <AuthPage>
             <AuthContent type='Login'>
                 <AuthForm title='Login' submitFunction={handleLogin}>
-                    <AuthInput
-                        placeholder='Login'
-                        type='text'
-                        handleChange={handleUsernameChange}
-                    />
-                    <AuthInput
+                    <Input placeholder='Login' type='text' handleChange={handleUsernameChange} />
+                    <Input
                         placeholder='Password'
                         type='password'
                         handleChange={handlePasswordChange}
