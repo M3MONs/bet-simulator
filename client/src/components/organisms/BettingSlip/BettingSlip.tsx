@@ -10,6 +10,7 @@ import { useBettingContext } from "src/context/BettingSlipContext";
 import BettingSlipPick from "src/components/molecules/BettingSlipPick/BettingSlipPick";
 import BettingSlipStake from "src/components/molecules/BettingSlipStake/BettingSlipStake";
 import NormalButton from "src/components/atoms/NormalButton";
+import { useAuth } from "src/context/AuthContext";
 
 const getHeader = (selectedBets: number) => {
     if (selectedBets === 0) {
@@ -25,6 +26,9 @@ const getHeader = (selectedBets: number) => {
 
 const BettingSlip = () => {
     const { selectedBets, canBet } = useBettingContext();
+    const { accessToken } = useAuth();
+
+    console.log(accessToken === null, !canBet);
 
     return (
         <BettingSlipWrapper>
@@ -39,7 +43,7 @@ const BettingSlip = () => {
             <BettingSlipFooter>
                 {selectedBets.length > 0 && <BettingSlipStake />}
                 <BettingSlipCalculator />
-                <NormalButton disabled={!canBet}>Bet</NormalButton>
+                <NormalButton disabled={!canBet || accessToken === null}>Bet</NormalButton>
             </BettingSlipFooter>
         </BettingSlipWrapper>
     );
