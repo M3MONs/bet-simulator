@@ -9,6 +9,7 @@ import ValidationInput from "../molecules/ValidationInput/ValidationInput";
 import { useAuth } from "src/context/AuthContext";
 import ErrorText from "../atoms/Error";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const RegisterPage = () => {
     const { register } = useAuth();
@@ -38,6 +39,7 @@ const RegisterPage = () => {
         if (isValid) {
             try {
                 await register(login, password, email);
+                toast.success("Account created successfully!");
                 navigate("/login");
             } catch (error: any) {
                 setErrors({ request: error.message });
