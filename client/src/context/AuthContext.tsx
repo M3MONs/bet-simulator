@@ -5,6 +5,7 @@ interface AuthContextProps {
     accessToken: string | null;
     refreshToken: string | null;
     login: (username: string, password: string) => Promise<void>;
+    register: (username: string, password: string, email: string) => Promise<void>;
     logout: () => void;
     handleRefreshToken: () => Promise<void>;
 }
@@ -36,6 +37,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         storeToken("accessToken", accessToken);
         storeToken("refreshToken", refreshToken);
     }, [accessToken, refreshToken]);
+
+    const register = async (username: string, password: string, email: string) => {
+        try {
+            const userData = { username, password, email };
+            await api.post("auth/user/register/", userData);
+        } catch (error: any) {
+            console.error("Register error:", error.message);
+            throw new Error("Register error");
+        }
+    };
 
     const login = async (username: string, password: string) => {
         try {
@@ -72,7 +83,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }, [refreshToken]);
 
     const value = useMemo(
-        () => ({ accessToken, refreshToken, login, logout, handleRefreshToken }),
+        () => ({ accessToken, refreshToken, login, logout, register, handleRefreshToken }),
         [accessToken, refreshToken, handleRefreshToken]
     );
 
