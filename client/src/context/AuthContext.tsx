@@ -43,8 +43,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             const { access, refresh } = res.data;
             setAccessToken(access);
             setRefreshToken(refresh);
-        } catch (error) {
-            console.error("Login error:", error);
+        } catch (error: any) {
+            console.error("Login error:", error.message);
             throw new Error("Invalid credentials");
         }
     };
