@@ -43,8 +43,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             const userData = { username, password, email };
             await api.post("auth/user/register/", userData);
         } catch (error: any) {
-            console.error("Register error:", error.message);
-            throw new Error("Register error");
+            if (error.response) {
+                console.error("Register error:", error.response.data);
+                throw new Error(error.response.data.username || error.response.data.email);
+            } else if (error.request) {
+                console.error("No response from server:", error.request);
+                throw new Error("No response from server");
+            } else {
+                console.error("Error:", error.message);
+                throw new Error(error.message || "Register error occurred. Try again later.");
+            }
         }
     };
 
