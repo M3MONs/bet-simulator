@@ -1,17 +1,19 @@
 import { useCallback, useState } from "react";
 import { useAuth } from "src/context/AuthContext";
 import AuthForm from "../molecules/AuthForm/AuthForm";
-import AuthInput from "../atoms/AuthInput";
 import AuthPage from "../templates/AuthPage";
 import LinkButton from "../atoms/LinkButton";
 import NormalButton from "../atoms/NormalButton";
 import AuthContent from "../organisms/AuthContent/AuthContent";
 import { useNavigate } from "react-router-dom";
+import Input from "../atoms/Input";
+import ErrorText from "../atoms/Error";
 
 const LoginPage = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState<string | null>(null);
     const { login } = useAuth();
 
     const handleUsernameChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,25 +29,23 @@ const LoginPage = () => {
         try {
             await login(username, password);
             navigate("/");
-        } catch (error) {
+        } catch (error: any) {
             console.log(error);
+            setError(error.toString());
         }
-    }, [username, password]);
+    }, [username, password, login, navigate]);
 
     return (
         <AuthPage>
             <AuthContent type='Login'>
                 <AuthForm title='Login' submitFunction={handleLogin}>
-                    <AuthInput
-                        placeholder='Login'
-                        type='text'
-                        handleChange={handleUsernameChange}
-                    />
-                    <AuthInput
+                    <Input placeholder='Login' type='text' handleChange={handleUsernameChange} />
+                    <Input
                         placeholder='Password'
                         type='password'
                         handleChange={handlePasswordChange}
                     />
+                    {error && <ErrorText>{error}</ErrorText>}
                     <NormalButton type='submit'>Login</NormalButton>
                     <LinkButton to='#' sx={{ color: "red", fontWeight: "bold", fontSize: "1rem" }}>
                         Forgot password?

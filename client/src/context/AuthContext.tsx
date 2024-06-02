@@ -5,6 +5,7 @@ interface AuthContextProps {
     accessToken: string | null;
     refreshToken: string | null;
     login: (username: string, password: string) => Promise<void>;
+    register: (username: string, password: string, email: string) => Promise<void>;
     logout: () => void;
     handleRefreshToken: () => Promise<void>;
 }
@@ -37,14 +38,32 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         storeToken("refreshToken", refreshToken);
     }, [accessToken, refreshToken]);
 
+    const register = async (username: string, password: string, email: string) => {
+        try {
+            const userData = { username, password, email };
+            await api.post("auth/user/register/", userData);
+        } catch (error: any) {
+            if (error.response) {
+                console.error("Register error:", error.response.data);
+                throw new Error(error.response.data.username || error.response.data.email);
+            } else if (error.request) {
+                console.error("No response from server:", error.request);
+                throw new Error("No response from server");
+            } else {
+                console.error("Error:", error.message);
+                throw new Error(error.message || "Register error occurred. Try again later.");
+            }
+        }
+    };
+
     const login = async (username: string, password: string) => {
         try {
             const res = await api.post("auth/token/", { username, password });
             const { access, refresh } = res.data;
             setAccessToken(access);
             setRefreshToken(refresh);
-        } catch (error) {
-            console.error("Login error:", error);
+        } catch (error: any) {
+            console.error("Login error:", error.message);
             throw new Error("Invalid credentials");
         }
     };
@@ -72,7 +91,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }, [refreshToken]);
 
     const value = useMemo(
-        () => ({ accessToken, refreshToken, login, logout, handleRefreshToken }),
+        () => ({ accessToken, refreshToken, login, logout, register, handleRefreshToken }),
         [accessToken, refreshToken, handleRefreshToken]
     );
 

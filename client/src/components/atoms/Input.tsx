@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Input = styled.input`
+const InputContainer = styled.input`
     width: 300px;
     padding: 1rem;
     border: 1px solid #ccc;
@@ -14,22 +14,22 @@ const Input = styled.input`
     }
 `;
 
-type AuthInputProps = {
+type InputProps = {
     handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     placeholder: string;
     type: string;
     name?: string;
 };
 
-const AuthInput = ({ handleChange, placeholder, type, name }: AuthInputProps) => {
+const Input = ({ handleChange, placeholder, type, name }: InputProps) => {
     return (
-        <Input
+        <InputContainer
+            onChange={(e) => handleChange(e)}
             placeholder={placeholder}
             type={type}
-            onChange={(e) => handleChange(e)}
             name={name}
         />
     );
 };
 
-export default AuthInput;
+export default Input;
