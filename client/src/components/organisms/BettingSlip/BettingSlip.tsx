@@ -28,8 +28,6 @@ const BettingSlip = () => {
     const { selectedBets, canBet } = useBettingContext();
     const { accessToken } = useAuth();
 
-    console.log(accessToken === null, !canBet);
-
     return (
         <BettingSlipWrapper>
             <BettingSlipHeader>{getHeader(selectedBets.length)}</BettingSlipHeader>
