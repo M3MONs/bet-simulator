@@ -20,7 +20,12 @@ const isUsernameValid = (username: string): boolean => {
     return username.length >= 6;
 };
 
-export type ErrorsProps = { email?: string; username?: string; password?: string };
+export type ErrorsProps = {
+    email?: string;
+    username?: string;
+    password?: string;
+    request?: string;
+};
 
 export const validateRegisterForm = (
     email: string,
