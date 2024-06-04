@@ -8,6 +8,7 @@ import AuthContent from "../organisms/AuthContent/AuthContent";
 import { useNavigate } from "react-router-dom";
 import Input from "../atoms/Input";
 import ErrorText from "../atoms/Error";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
     const navigate = useNavigate();
@@ -25,9 +26,9 @@ const LoginPage = () => {
     }, []);
 
     const handleLogin = useCallback(async () => {
-        // TODO: Add toast notification
         try {
             await login(username, password);
+            toast.success("Logged in successfully!");
             navigate("/");
         } catch (error: any) {
             console.log(error);
