@@ -27,6 +27,7 @@ class Match(models.Model):
     date = models.DateTimeField()
     external_id = models.CharField(max_length=100, null=True, blank=True)
     source = models.CharField(max_length=100, null=True, blank=True)
+    is_finished = models.BooleanField(default=False)
     last_updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -66,3 +67,13 @@ class Bet(models.Model):
 
     def __str__(self):
         return f"Bet for {self.match}"
+
+
+class Result(models.Model):
+    match = models.OneToOneField(Match, on_delete=models.CASCADE)
+    home_team_goals = models.IntegerField()
+    away_team_goals = models.IntegerField()
+    last_updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Result for {self.match}"
