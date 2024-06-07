@@ -50,3 +50,19 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.balance}"
+
+
+class Bet(models.Model):
+    CHOICES = [(0, "Home"), (1, "Draw"), (2, "Away")]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    match = models.ForeignKey(Match, on_delete=models.CASCADE)
+    odds = models.DecimalField(max_digits=5, decimal_places=2)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    choice = models.IntegerField(choices=CHOICES)
+    status = models.CharField(max_length=10, default="active")
+    timestamp = models.DateTimeField(auto_now=True)
+    payout = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+
+    def __str__(self):
+        return f"Bet for {self.match}"
