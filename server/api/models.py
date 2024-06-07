@@ -30,3 +30,14 @@ class Match(models.Model):
 
     def __str__(self):
         return f"{self.home_team.name} vs {self.away_team.name}"
+
+
+class Odd(models.Model):
+    match = models.ForeignKey(Match, on_delete=models.CASCADE)
+    home_team_odd = models.FloatField()
+    away_team_odd = models.FloatField()
+    draw_odd = models.FloatField()
+    last_updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Odds for {self.match}"
