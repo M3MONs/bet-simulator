@@ -14,3 +14,19 @@ class Team(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Match(models.Model):
+    home_team = models.ForeignKey(
+        Team, on_delete=models.CASCADE, related_name="home_team"
+    )
+    away_team = models.ForeignKey(
+        Team, on_delete=models.CASCADE, related_name="away_team"
+    )
+    date = models.DateTimeField()
+    external_id = models.CharField(max_length=100, null=True, blank=True)
+    source = models.CharField(max_length=100, null=True, blank=True)
+    last_updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.home_team.name} vs {self.away_team.name}"
